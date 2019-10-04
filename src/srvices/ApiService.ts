@@ -6,11 +6,12 @@ import { NetworkError } from '../errors/NetworkError';
 @Injectable
 export class ApiService {
 
-  async get(route: string) {
+  async get(route: string, cb: (err: NetworkError | null, data?: any) => void) {
     try {
-      return await fetch(route);
+      const data = await fetch(route);
+      cb(null, data);
     } catch (e) {
-      throw new NetworkError(e.message);
+      cb(new NetworkError(e.message));
     }
   }
 

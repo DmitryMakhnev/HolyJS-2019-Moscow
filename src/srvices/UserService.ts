@@ -1,7 +1,12 @@
 import { Dependency, Injectable } from '@renderilnik/core';
 import { ApiService } from './ApiService';
-import { NetworkError } from '../errors/NetworkError';
 import { UserError } from '../errors/UserError';
+
+
+type User = {
+  email: string;
+  password: string;
+};
 
 
 @Injectable
@@ -10,15 +15,13 @@ export class UserService {
   @Dependency
   private apiService: ApiService;
 
-  async getUser() {
-    try {
-      return await this.apiService.get('/user')
-    } catch (e) {
-      if (e instanceof NetworkError) {
-        throw new UserError('User not found');
+  getUser(cb: (err: UserError | null, data?: User) => void) {
+    this.apiService.get("/user", (err, data) => {
+      if (err !== null) {
+        return cb(new UserError("User not found"));
       }
-      throw e;
-    }
+      cb(null, data);
+    });
   }
 
 }
