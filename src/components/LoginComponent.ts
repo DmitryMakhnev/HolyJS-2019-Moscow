@@ -12,7 +12,12 @@ export class LoginComponent extends AbstractComponent {
 
   async getData(): Promise<void> {
     this.isLoading = true;
-    this.isLoggedIn = await this.authorizationService.checkAuthorization();
+    try {
+      await this.authorizationService.checkAuthorization();
+      this.isLoggedIn = true;
+    } catch (e) {
+      console.log(`[${e.name}]: ${e.message}`);
+    }
     this.isLoading = false;
   }
 
