@@ -1,4 +1,4 @@
 
 export class NetworkError extends Error {
-  name = 'NetworkError';
+  name: 'NetworkError';
 }

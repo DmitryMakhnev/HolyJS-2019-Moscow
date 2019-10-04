@@ -1,4 +1,4 @@
 
 export class AuthorizationError extends Error {
-  name = 'AuthorizationError';
+  name: 'AuthorizationError';
 }

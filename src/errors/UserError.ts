@@ -1,4 +1,4 @@
 
 export class UserError extends Error {
-  name = 'UserError';
+  name: 'UserError';
 }
