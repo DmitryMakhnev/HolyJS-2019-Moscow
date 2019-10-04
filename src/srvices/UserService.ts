@@ -15,13 +15,12 @@ export class UserService {
   @Dependency
   private apiService: ApiService;
 
-  getUser(cb: (err: UserError | null, data?: User) => void) {
-    this.apiService.get("/user", (err, data) => {
-      if (err !== null) {
-        return cb(new UserError("User not found"));
-      }
-      cb(null, data);
-    });
+  async getUser(): Promise<[User] | [null, UserError]> {
+    const [user, err] = await this.apiService.get("/user");
+    if (err !== null) {
+      return [null, new UserError("User not found")];
+    }
+    return [user];
   }
 
 }

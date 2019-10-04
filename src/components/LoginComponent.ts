@@ -12,18 +12,11 @@ export class LoginComponent extends AbstractComponent {
 
   async getData(): Promise<void> {
     this.isLoading = true;
-    return new Promise(resolve => {
-      this.authorizationService.checkAuthorization(
-        err => {
-          if (err !== null) {
-            console.log(`[${err.name}]: ${err.message}`);
-          }
-          this.isLoggedIn = err !== null;
-          this.isLoading = false;
-          resolve();
-        }
-      );
-    });
+    const [, error] = await this.authorizationService.checkAuthorization();
+    this.isLoggedIn = error === null;
+    if (error !== null) {
+      console.log(`[${error.name}]: ${error.message}`);
+    }
   }
 
   render(): string {
