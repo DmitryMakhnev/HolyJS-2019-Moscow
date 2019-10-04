@@ -1,0 +1,24 @@
+{
+  "name": "kharkivjs-2019-either",
+  "version": "0.0.1",
+  "description": "Cases for talk at KharkivJS 2019",
+  "main": "src/main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ООО «Рендерільник»",
+  "license": "UNLECENSED",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DmitryMakhnev/KharkivJS-2019.git"
+  },
+  "dependencies": {
+    "@renderilnik/core": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/assert": "^1.4.3",
+    "@types/mocha": "^5.2.7",
+    "mocha": "^6.2.0",
+    "typescript": "^3.6.3"
+  }
+}
