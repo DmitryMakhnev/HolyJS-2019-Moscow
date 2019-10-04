@@ -1,7 +1,5 @@
 import { AbstractComponent, Dependency } from "@renderilnik/core";
 import { AuthorizationService } from "../srvices/AuthorizationService";
-import { Ok } from '../errors/Ok';
-import { Failed } from '../errors/Failed';
 
 
 export class LoginComponent extends AbstractComponent {
@@ -14,12 +12,8 @@ export class LoginComponent extends AbstractComponent {
 
   async getData(): Promise<void> {
     this.isLoading = true;
-    const isAuthorized = await this.authorizationService.checkAuthorization();
-    this.isLoggedIn = isAuthorized instanceof Ok;
-    if (isAuthorized instanceof Failed) {
-      const e = isAuthorized.error;
-      console.log(`[${e.name}]: ${e.message}`);
-    }
+    const maybeAuthorized = await this.authorizationService.checkAuthorization();
+    this.isLoggedIn = maybeAuthorized.isRight();
     this.isLoading = false;
   }
 

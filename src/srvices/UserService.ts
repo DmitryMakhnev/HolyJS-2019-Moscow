@@ -1,9 +1,6 @@
-import { Dependency, Injectable } from '@renderilnik/core';
+import { Dependency, Either, Injectable } from '@renderilnik/core';
 import { ApiService } from './ApiService';
 import { UserError } from '../errors/UserError';
-import { NetworkError } from '../errors/NetworkError';
-import { Failed } from '../errors/Failed';
-import { Ok } from '../errors/Ok';
 
 
 type User = {
@@ -18,15 +15,9 @@ export class UserService {
   @Dependency
   private apiService: ApiService;
 
-  getUser(): Promise<Ok<User> | Failed<UserError>> {
-    return this.apiService
-      .get("/user")
-      .then(
-        e =>
-          e instanceof Failed
-            ? new Failed(new UserError("User not found"))
-            : e
-      );
+  async getUser(): Promise<Either<UserError, User>> {
+    const maybeUser = await this.apiService.get("/user");
+    return maybeUser.mapLeft(() => new UserError("User not found"));
   }
 
 }
