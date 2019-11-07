@@ -1,9 +1,9 @@
 import { bootstrap } from '@renderilnik/core';
-import { LoginComponent } from './components/LoginComponent';
+import { HomePageComponent } from './components/HomePageComponent';
 
 
 export function run() {
-  bootstrap(LoginComponent);
+  bootstrap(HomePageComponent);
 }
 
 
