@@ -13,7 +13,7 @@
     "url": "git@github.com:DmitryMakhnev/KharkivJS-2019.git"
   },
   "dependencies": {
-    "@renderilnik/core": "0.0.1"
+    "@renderilnik/core": "0.0.2"
   },
   "devDependencies": {
     "@types/assert": "^1.4.3",

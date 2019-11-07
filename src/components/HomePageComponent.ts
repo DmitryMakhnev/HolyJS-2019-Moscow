@@ -1,4 +1,4 @@
-import { AbstractComponent, Dependency } from "@renderilnik/core";
+import { AbstractComponent, Dependency, Either } from "@renderilnik/core";
 import { ConferenceService } from '../srvices/ConferenceService';
 
 
@@ -16,10 +16,10 @@ export class HomePageComponent extends AbstractComponent {
       this.conferenceService.getTalks(),
     ]);
 
-    // @ts-ignore
-    this.errors = result
-      .filter(data => data.isLeft())
-      .map(data => data.value);
+    Either.mergeInMany(result)
+      .mapLeft(errors => {
+        this.errors = errors;
+      });
 
   }
 
